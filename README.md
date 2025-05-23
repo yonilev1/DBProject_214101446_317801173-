@@ -530,47 +530,13 @@ All relevant screenshots are included in the attached final report (`Project_Rep
 **קלט:** `INT` – מזהה דייר  
 **פלט:** מספר תרופות (`INT`)  
 
-**קוד:**
-```sql
-CREATE OR REPLACE FUNCTION fn_count_medications(p_resident_id INT)
-RETURNS INT AS $$
-DECLARE
-  med_count INT;
-BEGIN
-  SELECT COUNT(*) INTO med_count
-  FROM ResidentMedications
-  WHERE ResidentID = p_resident_id;
 
-  RETURN med_count;
-END;
-$$ LANGUAGE plpgsql;
-
-SELECT fn_count_medications(101);
 ![func 1 run](https://github.com/user-attachments/assets/9b923644-0b1c-40e1-9a1b-70b00de86fe5)
 
 
 fn_total_treatments_by_type(p_type TEXT)
 תיאור:
 סופרת את מספר הטיפולים שנעשו מסוג מסוים (למשל עיסוי).
-
-קוד:
-
-sql
-Copy
-Edit
-CREATE OR REPLACE FUNCTION fn_total_treatments_by_type(p_type TEXT)
-RETURNS INT AS $$
-DECLARE
-  total_count INT;
-BEGIN
-  SELECT COUNT(*) INTO total_count
-  FROM MedicalTreatment
-  WHERE treatmenttype = p_type;
-
-  RETURN total_count;
-END;
-$$ LANGUAGE plpgsql;
-דוגמת הרצה:
 
 
 ![func 2 run](https://github.com/user-attachments/assets/1cd89347-8451-4e30-8cd7-4a6d4da4d836)
