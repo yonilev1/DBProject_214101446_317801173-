@@ -472,22 +472,7 @@ Example:
 ### View: ResidentWithCaregivers
 
 - **Purpose:** To display each resident and their primary caregiver.
-- **SQL Code:**
-```sql
-CREATE VIEW View_ResidentsWithCaregivers AS
-SELECT 
-  r.ResidentID,
-  r.FirstName AS ResidentFirstName,
-  r.LastName AS ResidentLastName,
-  r.Gender,
-  r.MedicalStatus,
-  c.CaregiverID,
-  c.FirstName AS CaregiverFirstName,
-  c.LastName AS CaregiverLastName,
-  c.Specialization
-FROM Resident r
-JOIN MedicalTreatment mt ON r.ResidentID = mt.ResidentID
-JOIN Caregiver c ON mt.CaregiverID = c.CaregiverID;
+
 ![מבטים 1](https://github.com/user-attachments/assets/26fa2c1c-6c45-43c1-92c4-199be27b22ea)
 ![מבטים 2](https://github.com/user-attachments/assets/6deeef11-d744-46e0-9ef3-d7e08544fed6)
 
