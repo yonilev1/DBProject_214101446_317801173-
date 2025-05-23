@@ -1,0 +1,1 @@
+CALL sp_update_medical_status(103, 'Stable');

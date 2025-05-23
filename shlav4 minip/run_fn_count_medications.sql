@@ -1,0 +1,1 @@
+SELECT fn_count_medications(101);

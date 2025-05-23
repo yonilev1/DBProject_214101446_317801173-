@@ -1,0 +1,1 @@
+SELECT fn_total_treatments_by_type('Massage');
