@@ -663,14 +663,9 @@ screenshots/ – תיקיית תמונות הרצה לתיעוד
 2. התקנת הספרייה psycopg2:
 
 3. הרצת שרת PostgreSQL ווידוא שניתן להתחבר דרך pgAdmin  
-4. יצירת קובץ `db_config.py` בתיקיית הפרויקט עם התוכן הבא:
+4. יצירת קובץ `db_config.py`
 
-```python
-DB_NAME = "nursinghome"
-DB_USER = "postgres"
-DB_PASSWORD = "your_password"
-DB_HOST = "localhost"
-DB_PORT = "5432"
+
 
 
 הרצת המערכת
@@ -678,9 +673,6 @@ DB_PORT = "5432"
 
 ודא שכל קבצי ה-GUI בתיקייה אחת:
 
-diff
-Copy
-Edit
 - app.py
 - residents_gui.py
 - caregivers_gui.py
@@ -689,10 +681,7 @@ Edit
 
 להרצת האפליקציה:
 
-nginx
-Copy
-Edit
-python app.py
+
 ייפתח המסך הראשי עם לחצנים לכל הפיצ'רים:
 ![main](https://github.com/user-attachments/assets/078e290d-1ee9-4b61-9d85-ccc48fe5e0c0)
 
