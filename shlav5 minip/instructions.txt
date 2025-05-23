@@ -1,0 +1,60 @@
+
+Instructions for Running the Nursing Home GUI Application
+==========================================================
+
+Developers: Chaim David Fox & Yoni Leventhal
+System: Nursing Home Management
+Language: Python
+Framework: Tkinter
+Database: PostgreSQL
+Admin Tool: pgAdmin
+Database Connection Library: psycopg2
+
+----------------------------------------------------------
+Requirements
+----------------------------------------------------------
+1. Python 3.8 or higher
+2. Install psycopg2 library:
+   pip install psycopg2
+
+3. Ensure PostgreSQL is running and accessible via pgAdmin
+4. Create a configuration file named db_config.py in the project folder with the following content:
+
+   DB_NAME = "nursinghome"
+   DB_USER = "postgres"
+   DB_PASSWORD = "your_password"
+   DB_HOST = "localhost"
+   DB_PORT = "5432"
+
+----------------------------------------------------------
+Running the Application
+----------------------------------------------------------
+1. Open the project folder in PyCharm, VSCode, or Terminal.
+2. Make sure all GUI files are in the same folder:
+   - app.py
+   - residents_gui.py
+   - caregivers_gui.py
+   - medications_gui.py
+   - queries_gui.py
+   - etc.
+
+3. To launch the application, run:
+
+   python app.py
+
+4. The main menu window will open with buttons to access all features:
+   - Manage Residents
+   - Manage Medications
+   - Manage Caregivers
+   - Manage Family Visits
+   - Manage Departments
+   - Manage Rooms
+   - Run Queries and Functions
+
+----------------------------------------------------------
+Notes
+----------------------------------------------------------
+- All screens support: Insert, Update, Delete, and Back actions.
+- Queries screen includes access to select queries and stored procedures from the database.
+- Ensure your database contains initial data for testing.
+- Ensure your user role has SELECT, INSERT, UPDATE, DELETE permissions.
