@@ -572,10 +572,7 @@ END;
 $$ LANGUAGE plpgsql;
 דוגמת הרצה:
 
-sql
-Copy
-Edit
-SELECT fn_total_treatments_by_type('Massage');
+
 ![func 2 run](https://github.com/user-attachments/assets/1cd89347-8451-4e30-8cd7-4a6d4da4d836)
 
 פרוצדורות
@@ -583,25 +580,6 @@ SELECT fn_total_treatments_by_type('Massage');
 תיאור:
 מעדכנת את הסטטוס הרפואי של דייר לפי מזהה.
 
-קוד:
-
-sql
-Copy
-Edit
-CREATE OR REPLACE PROCEDURE sp_update_medical_status(p_resident_id INT, p_new_status TEXT)
-AS $$
-BEGIN
-  UPDATE Resident
-  SET medicalstatus = p_new_status
-  WHERE residentid = p_resident_id;
-END;
-$$ LANGUAGE plpgsql;
-הרצה:
-
-sql
-Copy
-Edit
-CALL sp_update_medical_status(103, 'Stable');
 ![proce1 b](https://github.com/user-attachments/assets/61efcf8b-e513-4fda-9e6b-f4d7f41bc1af)
 ![proce1](https://github.com/user-attachments/assets/2f040e09-0784-49bc-9345-5040267fa645)
 
@@ -612,28 +590,7 @@ CALL sp_update_medical_status(103, 'Stable');
 
 קוד:
 
-sql
-Copy
-Edit
-CREATE OR REPLACE PROCEDURE sp_add_caregiver(
-  p_fname TEXT,
-  p_lname TEXT,
-  p_deptid INT,
-  p_hiredate DATE,
-  p_phone TEXT
-)
-AS $$
-BEGIN
-  INSERT INTO Caregiver(firstname, lastname, departmentid, hiredate, phone)
-  VALUES (p_fname, p_lname, p_deptid, p_hiredate, p_phone);
-END;
-$$ LANGUAGE plpgsql;
-הרצה:
 
-sql
-Copy
-Edit
-CALL sp_add_caregiver('Sarah', 'Ben-David', 1, CURRENT_DATE, '0501234567');
 ![proce2](https://github.com/user-attachments/assets/cb94e07a-2520-484f-9824-aa08b5c3fa8c)
 ![proce2 a](https://github.com/user-attachments/assets/3c4595f0-4dda-42d8-8ff3-a43f2ae51f79)
 
@@ -645,27 +602,7 @@ CALL sp_add_caregiver('Sarah', 'Ben-David', 1, CURRENT_DATE, '0501234567');
 
 פונקציה נלווית: log_medication_insert
 
-קוד הפונקציה:
-
-sql
-Copy
-Edit
-CREATE OR REPLACE FUNCTION log_medication_insert()
-RETURNS TRIGGER AS $$
-BEGIN
-  INSERT INTO MedicationLog(residentid, medicationid)
-  VALUES (NEW.residentid, NEW.medicationid);
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-קוד הטריגר:
-
-sql
-Copy
-Edit
-CREATE TRIGGER tr_update_medication_log
-AFTER INSERT ON ResidentMedications
-FOR EACH ROW EXECUTE FUNCTION log_medication_insert();
+ק
 ![triger1 b](https://github.com/user-attachments/assets/ef3f7f5b-91fd-4277-9990-dabe6f8e64ed)
 ![triger1 a](https://github.com/user-attachments/assets/d23bd185-ea4a-4124-a791-6267909bdead)
 
@@ -678,28 +615,7 @@ FOR EACH ROW EXECUTE FUNCTION log_medication_insert();
 
 פונקציה נלווית: validate_treatment_date
 
-קוד הפונקציה:
 
-sql
-Copy
-Edit
-CREATE OR REPLACE FUNCTION validate_treatment_date()
-RETURNS TRIGGER AS $$
-BEGIN
-  IF NEW.treatmentdate > CURRENT_DATE THEN
-    RAISE EXCEPTION 'Cannot insert future treatment date.';
-  END IF;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-קוד הטריגר:
-
-sql
-Copy
-Edit
-CREATE TRIGGER tr_check_treatment_date
-BEFORE INSERT ON MedicalTreatment
-FOR EACH ROW EXECUTE FUNCTION validate_treatment_date();
 ![triger2 run](https://github.com/user-attachments/assets/f8497f09-8d2b-4815-87e2-c96fc24ac205)
 ![triger2](https://github.com/user-attachments/assets/5d7d3566-4f4d-40b6-b47d-ccf597bd028d)
 
@@ -709,21 +625,12 @@ FOR EACH ROW EXECUTE FUNCTION validate_treatment_date();
 run_fn_count_medications.sql
 תיאור:
 מריצה את fn_count_medications עם מזהה דייר.
-
-sql
-Copy
-Edit
-SELECT fn_count_medications(101);
-run_sp_add_caregiver.sql
 ![run main1](https://github.com/user-attachments/assets/b9050005-2c6f-427d-b083-f140551738f5)
 
 תיאור:
 מריצה את sp_add_caregiver לצורך הוספת מטפל לדוגמה.
 
-sql
-Copy
-Edit
-CALL sp_add_caregiver('Sarah', 'Ben-David', 1, CURRENT_DATE, '0501234567');
+
 ![run main2](https://github.com/user-attachments/assets/c1778998-ac20-413b-8b2e-763a75753399)
 
 🗃️ קבצים נוספים
