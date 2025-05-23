@@ -1,0 +1,55 @@
+import csv
+import random
+from faker import Faker
+
+# Initialize Faker
+fake = Faker()
+
+# Set random seed for reproducibility
+random.seed(42)
+fake.seed_instance(42)
+
+# Define the number of departments to generate
+num_departments = 1000
+
+# Create a list to store department data
+departments = []
+
+# Department name templates
+dept_prefixes = ["North", "South", "East", "West", "Central", "Main", "Regional", "Community", "Senior", "Primary"]
+dept_types = ["Assisted Living", "Memory Care", "Skilled Nursing", "Rehabilitation", "Respite Care", 
+              "Palliative Care", "Geriatric Care", "Cardiac Care", "Dementia Care", "Long-term Care"]
+dept_suffixes = ["Unit", "Wing", "Department", "Center", "Division", "Ward", "Facility", "Section", "Suite", "Group"]
+
+# Generate department data
+for i in range(1, num_departments + 1):
+    department_id = i
+    
+    # Department name - ensure less than 30 chars
+    prefix = random.choice(dept_prefixes)
+    dept_type = random.choice(dept_types)
+    suffix = random.choice(dept_suffixes)
+    name = f"{prefix} {dept_type}"
+    if random.random() > 0.5:
+        name += f" {suffix}"
+    name = name[:30]
+    
+    # Manager name - ensure less than 30 chars
+    manager = fake.name()[:30]
+    
+    # Phone - ensure less than 20 chars
+    phone = fake.phone_number()[:10]
+    
+    departments.append([department_id, name, manager, phone])
+
+# Write to CSV file
+csv_filename = 'department_data.csv'
+
+with open(csv_filename, 'w', newline='') as csvfile:
+    csv_writer = csv.writer(csvfile)
+    # Write header
+    csv_writer.writerow(['DepartmentID', 'Name', 'Manager', 'Phone'])
+    # Write data
+    csv_writer.writerows(departments)
+
+print(f"Created {csv_filename} with {num_departments} departments")

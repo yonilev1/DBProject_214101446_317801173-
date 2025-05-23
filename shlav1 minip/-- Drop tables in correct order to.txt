@@ -1,0 +1,7 @@
+-- Drop tables in correct order to avoid foreign key constraint issues
+DROP TABLE IF EXISTS FamilyVisit;
+DROP TABLE IF EXISTS MedicalTreatment;
+DROP TABLE IF EXISTS Resident;
+DROP TABLE IF EXISTS Room;
+DROP TABLE IF EXISTS Caregiver;
+DROP TABLE IF EXISTS Department;

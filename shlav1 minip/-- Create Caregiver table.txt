@@ -1,0 +1,71 @@
+-- Create Caregiver table
+CREATE TABLE Caregiver (
+    CaregiverID INT NOT NULL,
+    FirstName VARCHAR(40) NOT NULL,
+    LastName VARCHAR(40) NOT NULL,
+    Phone VARCHAR(20) NOT NULL,
+    HireDate DATE NOT NULL,
+    DepartmentID INT,
+    PRIMARY KEY (CaregiverID)
+);
+
+-- Create Department table
+CREATE TABLE Department (
+    DepartmentID INT NOT NULL,
+    Name VARCHAR(30) NOT NULL,
+    Manager VARCHAR(30) NOT NULL,
+    Phone VARCHAR(20) NOT NULL,
+    PRIMARY KEY (DepartmentID)
+);
+
+-- Add Foreign Key to Caregiver table after Department table is created
+ALTER TABLE Caregiver
+ADD CONSTRAINT FK_Caregiver_Department
+FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID);
+
+-- Create Room table
+CREATE TABLE Room (
+    RoomID INT NOT NULL,
+    RoomNumber INT NOT NULL,
+    Floor INT NOT NULL,
+    Capacity INT NOT NULL,
+    RoomType VARCHAR(20) NOT NULL,
+    DepartmentID INT NOT NULL,
+    PRIMARY KEY (RoomID),
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+
+-- Create Resident table
+CREATE TABLE Resident (
+    ResidentID INT NOT NULL,
+    FirstName VARCHAR(20) NOT NULL,
+    LastName VARCHAR(20) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    AdmissionDate DATE NOT NULL,
+    RoomID INT NOT NULL,
+    PRIMARY KEY (ResidentID),
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+);
+
+-- Create MedicalTreatment table
+CREATE TABLE MedicalTreatment (
+    TreatmentID INT NOT NULL,
+    ResidentID INT NOT NULL,
+    CaregiverID INT NOT NULL,
+    TreatmentDate DATE NOT NULL,
+    TreatmentType VARCHAR(40) NOT NULL,
+    PRIMARY KEY (TreatmentID),
+    FOREIGN KEY (ResidentID) REFERENCES Resident(ResidentID),
+    FOREIGN KEY (CaregiverID) REFERENCES Caregiver(CaregiverID)
+);
+
+-- Create FamilyVisit table
+CREATE TABLE FamilyVisit (
+    VisitID INT NOT NULL,
+    ResidentID INT NOT NULL,
+    VisitorName VARCHAR(40) NOT NULL,
+    VisitDate DATE NOT NULL,
+    Relation VARCHAR(40) NOT NULL,
+    PRIMARY KEY (VisitID),
+    FOREIGN KEY (ResidentID) REFERENCES Resident(ResidentID)
+);

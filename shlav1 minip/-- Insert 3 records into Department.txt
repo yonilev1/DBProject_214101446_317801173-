@@ -1,0 +1,35 @@
+-- Insert 3 records into Department table
+INSERT INTO Department (DepartmentID, Name, Manager, Phone)
+VALUES (1, 'Geriatrics', 'Dr. Cohen', '054-1234567'),
+       (2, 'Rehabilitation', 'Dr. Levy', '054-7654321'),
+       (3, 'Memory Care', 'Dr. Shapiro', '054-9876543');
+
+-- Insert 3 records into Caregiver table
+INSERT INTO Caregiver (CaregiverID, FirstName, LastName, Phone, HireDate, DepartmentID)
+VALUES (1, 'Yael', 'Avraham', '052-1111111', '2020-01-15', 1),
+       (2, 'Moshe', 'Ben-David', '052-2222222', '2021-03-20', 2),
+       (3, 'Sarah', 'Levi', '052-3333333', '2019-11-10', 3);
+
+-- Insert 3 records into Room table
+INSERT INTO Room (RoomID, RoomNumber, Floor, Capacity, RoomType, DepartmentID)
+VALUES (1, 101, 1, 2, 'Shared', 1),
+       (2, 201, 2, 1, 'Private', 2),
+       (3, 301, 3, 2, 'Shared', 3);
+
+-- Insert 3 records into Resident table
+INSERT INTO Resident (ResidentID, FirstName, LastName, DateOfBirth, AdmissionDate, RoomID)
+VALUES (1, 'Avraham', 'Cohen', '1940-05-10', '2022-01-15', 1),
+       (2, 'Ruth', 'Goldberg', '1945-09-20', '2021-11-10', 2),
+       (3, 'David', 'Mizrahi', '1938-03-15', '2022-02-01', 3);
+
+-- Insert 3 records into MedicalTreatment table
+INSERT INTO MedicalTreatment (TreatmentID, ResidentID, CaregiverID, TreatmentDate, TreatmentType)
+VALUES (1, 1, 1, '2023-01-05', 'Blood Pressure Check'),
+       (2, 2, 2, '2023-01-06', 'Physical Therapy'),
+       (3, 3, 3, '2023-01-07', 'Memory Assessment');
+
+-- Insert 3 records into FamilyVisit table
+INSERT INTO FamilyVisit (VisitID, ResidentID, VisitorName, VisitDate, Relation)
+VALUES (1, 1, 'Dina Cohen', '2023-01-10', 'Daughter'),
+       (2, 2, 'Yossi Goldberg', '2023-01-12', 'Son'),
+       (3, 3, 'Talia Mizrahi', '2023-01-15', 'Granddaughter');

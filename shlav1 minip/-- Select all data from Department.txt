@@ -1,0 +1,17 @@
+-- Select all data from Department table
+SELECT * FROM Department;
+
+-- Select all data from Caregiver table
+SELECT * FROM Caregiver;
+
+-- Select all data from Room table
+SELECT * FROM Room;
+
+-- Select all data from Resident table
+SELECT * FROM Resident;
+
+-- Select all data from MedicalTreatment table
+SELECT * FROM MedicalTreatment;
+
+-- Select all data from FamilyVisit table
+SELECT * FROM FamilyVisit;

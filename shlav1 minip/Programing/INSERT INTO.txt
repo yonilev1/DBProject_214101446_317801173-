@@ -1,0 +1,9 @@
+INSERT INTO FamilyVisit (VisitID, ResidentID, VisitorName, VisitDate, Relation)
+SELECT 
+    gs AS VisitID,
+    FLOOR(RANDOM() * 1000 + 1) AS ResidentID,
+    (ARRAY['David Cohen', 'Sarah Levy', 'Michael Rosen', 'Rachel Ben-David', 'Eli Goldstein', 
+           'Noa Mizrahi', 'Itamar Shapiro', 'Lea Abramov', 'Shimon Katz', 'Yael Weiss'])[FLOOR(RANDOM() * 10 + 1)] AS VisitorName,
+    NOW() - (INTERVAL '1 day' * FLOOR(RANDOM() * 730)) AS VisitDate,
+    (ARRAY['Father', 'Mother', 'Brother', 'Sister', 'Son', 'Daughter', 'Grandchild'])[FLOOR(RANDOM() * 7 + 1)] AS Relation
+FROM GENERATE_SERIES(1, 1000) AS gs;

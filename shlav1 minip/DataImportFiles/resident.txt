@@ -1,0 +1,54 @@
+import csv
+import random
+from faker import Faker
+from datetime import datetime, timedelta
+
+# Initialize Faker
+fake = Faker()
+
+# Set random seed for reproducibility
+random.seed(42)
+fake.seed_instance(42)
+
+# Define the number of residents to generate
+num_residents = 1000
+
+# Define the number of rooms (from the previous script)
+num_rooms = 1000
+
+# Create a list to store resident data
+residents = []
+
+# Generate resident data
+for i in range(1, num_residents + 1):
+    resident_id = i
+    
+    # First name - ensure less than 20 chars
+    first_name = fake.first_name()[:20]
+    
+    # Last name - ensure less than 20 chars
+    last_name = fake.last_name()[:20]
+    
+    # Date of birth - between 60 and 100 years ago
+    date_of_birth = fake.date_of_birth(minimum_age=60, maximum_age=100)
+    
+    # Admission date - between 5 years ago and today
+    admission_date = fake.date_between(start_date='-5y', end_date='today')
+    
+    # Room ID - foreign key to Room table
+    # Distribute residents across rooms, considering room capacity
+    room_id = random.randint(1, num_rooms)
+    
+    residents.append([resident_id, first_name, last_name, date_of_birth, admission_date, room_id])
+
+# Write to CSV file
+csv_filename = 'resident_data.csv'
+
+with open(csv_filename, 'w', newline='') as csvfile:
+    csv_writer = csv.writer(csvfile)
+    # Write header
+    csv_writer.writerow(['ResidentID', 'FirstName', 'LastName', 'DateOfBirth', 'AdmissionDate', 'RoomID'])
+    # Write data
+    csv_writer.writerows(residents)
+
+print(f"Created {csv_filename} with {num_residents} residents")
